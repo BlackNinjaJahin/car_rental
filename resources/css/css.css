@@ -1,0 +1,78 @@
+/* Custom styling for the form */
+body {
+    background-color: #f5f7fa;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 650px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #d3d3d3;
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.form-control {
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #17a2b8;
+    box-shadow: 0 0 10px rgba(23, 162, 184, 0.2);
+}
+
+select.form-control {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+.form-control-file {
+    margin-top: 10px;
+}
+
+.btn-custom {
+    background-color: #17a2b8;
+    border: none;
+    padding: 12px 30px;
+    color: #fff;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn-custom:hover {
+    background-color: #138496;
+}
+
+.form-control::placeholder {
+    color: #adb5bd;
+    font-style: italic;
+}
