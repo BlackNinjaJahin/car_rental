@@ -2,72 +2,60 @@
 
 @section('content')
     @include('partials._alerts')
-    <h2 class="mb-4">Customer List</h2>
+    
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card shadow-lg" style="width: 500px; margin-top: 40px;">
+            <div class="card-header bg-primary text-white text-center">
+                <h4>Add Customer</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('admin.customers.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Customer Name</label>
+                        <input class="form-control" id="name" name="name" type="text" value="{{ old('name') }}" required>
+                        @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
 
-    <div class="input-group mb-3">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search customers..." aria-label="Search customers">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input class="form-control" id="email" name="email" type="email" value="{{ old('email') }}" required>
+                        @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input class="form-control" id="phone" name="phone" type="text" value="{{ old('phone') }}" required>
+                        @error('phone')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input class="form-control" id="address" name="address" type="text" value="{{ old('address') }}" required>
+                        @error('address')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input class="form-control" id="password" name="password" type="password" required>
+                        @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="submit">Add Customer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <table class="table table-striped table-bordered" id="customerTable">
-        <thead class="table-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Customer Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone Number</th>
-                <th scope="col">Address</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($customers as $key => $customer)
-                <tr>
-                    <th scope="row">{{ $key + 1 }}</th>
-                    <td>{{ $customer->name }}</td>
-                    <td>{{ $customer->email }}</td>
-                    <td>{{ $customer->phone }}</td>
-                    <td>{{ $customer->address }}</td>
-                    <td>
-                        <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('admin.customers.destroy', $customer->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    <div class="pagination mt-3">
-        {{ $customers->links() }}  <!-- Pagination controls -->
-    </div>
-@endsection
-
-@section('scripts')
-<script>
-    // JavaScript for filtering the table based on search input
-    document.getElementById('searchInput').addEventListener('keyup', function() {
-        const filter = this.value.toLowerCase();
-        const rows = document.querySelectorAll('#customerTable tbody tr');
-
-        rows.forEach(row => {
-            const cells = row.getElementsByTagName('td');
-            let match = false;
-
-            for (let i = 0; i < cells.length - 1; i++) { // Exclude the last column (Actions)
-                const cell = cells[i];
-                if (cell) {
-                    const textValue = cell.textContent || cell.innerText;
-                    if (textValue.toLowerCase().indexOf(filter) > -1) {
-                        match = true;
-                    }
-                }
-            }
-
-            row.style.display = match ? '' : 'none'; // Show or hide row based on search
-        });
-    });
-</script>
 @endsection
